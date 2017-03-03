@@ -19,6 +19,7 @@ import com.xznn.hongyang.R;
 import com.xznn.hongyang.adapter.TextHolderAdatpter;
 import com.xznn.hongyang.bean.TextBean;
 import com.xznn.hongyang.fragment.TBHeadlineFragment;
+import com.xznn.hongyang.fragment.ViewPagerDemoFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements TextHolderAdatpte
         mData = new ArrayList();
         mData.add(new TextBean("浅谈 MVP in Android", "http://blog.csdn.net/lmj623565791/article/details/46596109"));
         mData.add(new TextBean("京东头条控件", "模仿京东头条，上下无限滚动"));
+        mData.add(new TextBean("ViewPagerDemo", "http://www.imooc.com/article/2580"));
 
 
         adapter = new TextHolderAdatpter(this, mData);
@@ -109,6 +111,10 @@ public class MainActivity extends AppCompatActivity implements TextHolderAdatpte
             case 1:
                 openFragment(new TBHeadlineFragment(), bean.getTitle());
                 break;
+            case 2:
+                openFragment(new ViewPagerDemoFragment(), bean.getTitle());
+                break;
+
 
         }
     }
