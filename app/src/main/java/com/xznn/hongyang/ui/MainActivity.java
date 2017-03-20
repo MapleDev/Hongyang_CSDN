@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.xznn.hongyang.R;
 import com.xznn.hongyang.adapter.TextHolderAdatpter;
 import com.xznn.hongyang.bean.TextBean;
+import com.xznn.hongyang.fragment.CrashHandlerFragment;
 import com.xznn.hongyang.fragment.TBHeadlineFragment;
 import com.xznn.hongyang.fragment.ViewPagerDemoFragment;
 
@@ -86,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements TextHolderAdatpte
         mData.add(new TextBean("浅谈 MVP in Android", "http://blog.csdn.net/lmj623565791/article/details/46596109"));
         mData.add(new TextBean("京东头条控件", "模仿京东头条，上下无限滚动"));
         mData.add(new TextBean("ViewPagerDemo", "http://www.imooc.com/article/2580"));
+        mData.add(new TextBean("CrashHandlerFragment", ""));
 
 
         adapter = new TextHolderAdatpter(this, mData);
@@ -113,6 +115,9 @@ public class MainActivity extends AppCompatActivity implements TextHolderAdatpte
                 break;
             case 2:
                 openFragment(new ViewPagerDemoFragment(), bean.getTitle());
+                break;
+            case 3:
+                openFragment(new CrashHandlerFragment(), bean.getTitle());
                 break;
 
 
