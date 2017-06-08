@@ -1,31 +1,28 @@
 package com.xznn.hongyang.ui;
 
-import android.os.Build;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xznn.hongyang.R;
 import com.xznn.hongyang.adapter.TextHolderAdatpter;
+import com.xznn.hongyang.base.BaseActivity;
 import com.xznn.hongyang.bean.TextBean;
 import com.xznn.hongyang.fragment.CrashHandlerFragment;
+import com.xznn.hongyang.fragment.CustViewFragment;
 import com.xznn.hongyang.fragment.TBHeadlineFragment;
 import com.xznn.hongyang.fragment.ViewPagerDemoFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements TextHolderAdatpter.TextHolderClickListener {
+public class MainActivity extends BaseActivity implements TextHolderAdatpter.TextHolderClickListener {
 
     private final String TAG = MainActivity.class.getSimpleName();
     private TextHolderAdatpter adapter;
@@ -38,28 +35,12 @@ public class MainActivity extends AppCompatActivity implements TextHolderAdatpte
     private List<TextBean> mData;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //设置contentView
-        beforeSetContentView();
-        setContentView(R.layout.activity_main);
-        afterSetContentView();
-        //初始化数据
-        initData();
-        //初始化View
-        initView();
+    protected int setContentResId() {
+        return R.layout.activity_main;
     }
 
-    protected void beforeSetContentView() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //透明状态栏
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            //透明底部导航栏
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        }
-    }
-
-    private void afterSetContentView() {
+    @Override
+    protected void afterSetContentView() {
         toolbar_title_tv = (TextView) findViewById(R.id.activity_main_toolbar_title_tv);
         toolbar_back_tv = (TextView) findViewById(R.id.activity_main_toolbar_back_tv);
         toolbar_profile_iv = (ImageView) findViewById(R.id.activity_main_toolbar_profile_iv);
@@ -82,12 +63,15 @@ public class MainActivity extends AppCompatActivity implements TextHolderAdatpte
         hideBackButton();
     }
 
+
+    @Override
     protected void initData() {
         mData = new ArrayList();
         mData.add(new TextBean("浅谈 MVP in Android", "http://blog.csdn.net/lmj623565791/article/details/46596109"));
         mData.add(new TextBean("京东头条控件", "模仿京东头条，上下无限滚动"));
         mData.add(new TextBean("ViewPagerDemo", "http://www.imooc.com/article/2580"));
         mData.add(new TextBean("CrashHandlerFragment", ""));
+        mData.add(new TextBean("GcsSloop自定义View系列文章", "http://www.gcssloop.com/customview/CustomViewIndex/"));
 
 
         adapter = new TextHolderAdatpter(this, mData);
@@ -120,15 +104,16 @@ public class MainActivity extends AppCompatActivity implements TextHolderAdatpte
                 openFragment(new CrashHandlerFragment(), bean.getTitle());
                 break;
 
+            case 4:
+                openFragment(new CustViewFragment(), bean.getTitle());
+                break;
+
 
         }
     }
 
     private void openFragment(Fragment fragment, String fragmentName) {
-        fragmentManager.beginTransaction()
-                .replace(R.id.main_container, fragment)
-                .addToBackStack(null)
-                .commitAllowingStateLoss();
+        fragmentManager.beginTransaction().replace(R.id.main_container, fragment).addToBackStack(null).commitAllowingStateLoss();
         showBackButton(fragmentName);
     }
 
@@ -154,4 +139,5 @@ public class MainActivity extends AppCompatActivity implements TextHolderAdatpte
         if (drawerLayout != null) {
             drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNDEFINED);
         }
-    }}
+    }
+}

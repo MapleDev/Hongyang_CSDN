@@ -4,7 +4,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#444"
-                android:paddingTop="@dimen/toolbar_padding_top">
+                android:paddingTop="@dimen/toolbar_padding_top"
+    >
+    <!--android:paddingTop="@dimen/toolbar_padding_top"-->
+
 
     <RelativeLayout
         android:layout_width="match_parent"
